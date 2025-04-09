@@ -3,6 +3,9 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import Metodos.Conexion;
 
 public class ClientesClass {
@@ -136,32 +139,90 @@ public class ClientesClass {
 		this.direccion = direccion;
 	}
 
-	Conexion conector = new Conexion();
 
-	public void create(int tipodocumento, int documento, String nombres, String apellidos, String eps, String alergias,
-			String fechanacimiento, String correo, String estadocivil, String telefono, String direccion) {
-		Connection dbConnection = null;
-		PreparedStatement pst = null;
-		String script = "INSERT INTO tblclientes (tipodocumento, documento, nombres, apellidos, eps, alergias, fechanacimiento, correo, estadocivil, telefono, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try {
-			dbConnection = conector.conectarBD();
-			pst = dbConnection.prepareStatement(script);
-			pst.setInt(1, tipodocumento);
-			pst.setInt(2, documento);
-			pst.setString(3, nombres);
-			pst.setString(4, apellidos);
-			pst.setString(5, eps);
-			pst.setString(6, alergias);
-			pst.setString(7, fechanacimiento);
-			pst.setString(8, correo);
-			pst.setString(9, estadocivil);
-			pst.setString(10, telefono);
-			pst.setString(11, direccion);
-			pst.execute();
-			System.out.println("Cliente registrado con éxito.");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+	    Conexion conector = new Conexion();
+
+	    public void create(int tipodocumento, int documento, String nombres, String apellidos, String eps,
+	                       String alergias, String fechanacimiento, String correo, String estadocivil,
+	                       String telefono, String direccion) {
+	        Connection dbConnection = null;
+	        PreparedStatement pst = null;
+
+	        String script = "INSERT INTO tblclientes (tipodocumento, documento, nombres, apellidos, eps, alergias, fechanacimiento, correo, estadocivil, telefono, direccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        try {
+	            dbConnection = conector.conectarBD();
+	            pst = dbConnection.prepareStatement(script);
+
+	            pst.setInt(1, tipodocumento);
+	            pst.setInt(2, documento);
+	            pst.setString(3, nombres);
+	            pst.setString(4, apellidos);
+	            pst.setString(5, eps);
+	            pst.setString(6, alergias);
+	            pst.setString(7, fechanacimiento);
+	            pst.setString(8, correo);
+	            pst.setString(9, estadocivil);
+	            pst.setString(10, telefono);
+	            pst.setString(11, direccion);
+
+	            pst.execute();
+	            JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+
+	    public void update(int id, int tipodocumento, int documento, String nombres, String apellidos, String eps,
+	                       String alergias, String fechanacimiento, String correo, String estadocivil,
+	                       String telefono, String direccion) {
+	        Connection dbConnection = null;
+	        PreparedStatement pst = null;
+
+	        String script = "UPDATE tblclientes SET tipodocumento = ?, documento = ?, nombres = ?, apellidos = ?, eps = ?, alergias = ?, fechanacimiento = ?, correo = ?, estadocivil = ?, telefono = ?, direccion = ? WHERE id = ?";
+	        try {
+	            dbConnection = conector.conectarBD();
+	            pst = dbConnection.prepareStatement(script);
+
+	            pst.setInt(1, tipodocumento);
+	            pst.setInt(2, documento);
+	            pst.setString(3, nombres);
+	            pst.setString(4, apellidos);
+	            pst.setString(5, eps);
+	            pst.setString(6, alergias);
+	            pst.setString(7, fechanacimiento);
+	            pst.setString(8, correo);
+	            pst.setString(9, estadocivil);
+	            pst.setString(10, telefono);
+	            pst.setString(11, direccion);
+	            pst.setInt(12, id);
+
+	            int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar esta fila?");
+	            if (confirm == JOptionPane.OK_OPTION) {
+	                pst.executeUpdate();
+	                JOptionPane.showMessageDialog(null, "Cliente actualizado con éxito");
+	            }
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
+
+	    public void delete(int id) {
+	        Connection dbConnection = null;
+	        PreparedStatement pst = null;
+
+	        String script = "DELETE FROM tblclientes WHERE id = ?";
+	        try {
+	            dbConnection = conector.conectarBD();
+	            pst = dbConnection.prepareStatement(script);
+	            pst.setInt(1, id);
+
+	            int confirm = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente?");
+	            if (confirm == JOptionPane.OK_OPTION) {
+	                pst.executeUpdate();
+	                JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito");
+	            }
+	        } catch (SQLException e) {
+	            System.out.println(e.getMessage());
+	        }
+	    }
 	}
-
-}

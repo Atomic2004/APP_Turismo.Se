@@ -22,16 +22,19 @@ public class FrmUsuario extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton btnVehiculos = new JButton("Ver Vehículos");
-        btnVehiculos.setBounds(200, 44, 150, 30);
+        JButton btnVehiculos = new JButton("");
+        btnVehiculos.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-vehicles-64.png"));
+        btnVehiculos.setBounds(293, 23, 110, 73);
         contentPane.add(btnVehiculos);
 
-        JButton btnDestinos = new JButton("Ver Destinos");
-        btnDestinos.setBounds(40, 44, 150, 30);
+        JButton btnDestinos = new JButton("");
+        btnDestinos.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-travel-itinerary-64.png"));
+        btnDestinos.setBounds(166, 23, 110, 73);
         contentPane.add(btnDestinos);
 
-        JButton btnPaquetes = new JButton("Ver Paquetes");
-        btnPaquetes.setBounds(360, 44, 150, 30);
+        JButton btnPaquetes = new JButton("");
+        btnPaquetes.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-trave-diary-48.png"));
+        btnPaquetes.setBounds(30, 23, 110, 73);
         contentPane.add(btnPaquetes);
 
         JScrollPane scrollPane = new JScrollPane();

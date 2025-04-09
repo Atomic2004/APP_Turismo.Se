@@ -59,22 +59,7 @@ public class LoginClass {
 			}
 		} catch (SQLException e) {
 			System.out.println("Error en la validación del usuario: " + e.getMessage());
-		} finally {
-			cerrarRecursos(rs, pst, dbConnection);
 		}
 		return rol;
-	}
-
-	private void cerrarRecursos(ResultSet rs, PreparedStatement pst, Connection conn) {
-		try {
-			if (rs != null)
-				rs.close();
-			if (pst != null)
-				pst.close();
-			if (conn != null)
-				conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }

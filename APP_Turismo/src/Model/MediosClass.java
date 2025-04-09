@@ -3,6 +3,9 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import Metodos.Conexion;
 
 public class MediosClass {
@@ -64,7 +67,48 @@ public class MediosClass {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
+
+	public void update(int idmedios, String nombre, String observacion) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+
+		String script = "UPDATE tblmedios SET nombre = ?, observacion = ?, WHERE idmedios = ?;";
+		try {
+			dbConnection = conector.conectarBD();
+			pst = dbConnection.prepareStatement(script);
+
+			pst.setString(1, nombre);
+			pst.setInt(6, idmedios);
+			pst.setString(7, observacion);
+
+			int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar esta fila?");
+			if (confirm == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Fila actualizada con éxito");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void delete(int idmedios) {
+		Connection dbConnection = null;
+		PreparedStatement pst = null;
+
+		String script = "DELETE FROM tblmedios WHERE idmedios = ?;";
+		try {
+			dbConnection = conector.conectarBD();
+			pst = dbConnection.prepareStatement(script);
+			pst.setInt(1, idmedios);
+
+			int confirm = JOptionPane.showConfirmDialog(null, "¿Desea eliminar esta fila?");
+			if (confirm == JOptionPane.OK_OPTION) {
+				pst.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Fila eliminada con éxito");
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 }

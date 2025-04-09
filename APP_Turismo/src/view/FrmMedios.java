@@ -98,18 +98,25 @@ public class FrmMedios extends JFrame {
 		JButton btneliminar = new JButton("");
 		btneliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MediosClass cr = new MediosClass();
+				cr.delete(Integer.parseInt(textidmedios.getText()));
 
 			}
 		});
 		btneliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-full-trash-64.png"));
-		btneliminar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-			}
-		});
 		btneliminar.setBounds(156, 161, 83, 78);
 		contentPane.add(btneliminar);
+		
+		JButton btnupdate = new JButton("");
+		btnupdate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MediosClass cr = new MediosClass();
+				cr.update(Integer.parseInt(textidmedios.getText()), textnombre.getText(), textobservacion.getText());
+				
+			}
+		});
+		btnupdate.setBounds(262, 161, 83, 78);
+		contentPane.add(btnupdate);
 	}
-
 }

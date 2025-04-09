@@ -14,6 +14,7 @@ public class FrmAgencias extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textNombre, textDireccion, textCorreo, textTelefono, textWeb, textIdCompania;
+    private JTextField textidagencias;
 
     public FrmAgencias() {
         setTitle("Gestión de Agencias");
@@ -24,46 +25,46 @@ public class FrmAgencias extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel label = new JLabel("Nombre:");
-        label.setBounds(107, 11, 63, 24);
-        contentPane.add(label);
+        JLabel Nombre = new JLabel("Nombre:");
+        Nombre.setBounds(107, 11, 63, 24);
+        contentPane.add(Nombre);
         textNombre = new JTextField();
         textNombre.setBounds(180, 11, 129, 24);
         contentPane.add(textNombre);
 
-        JLabel label_1 = new JLabel("Dirección:");
-        label_1.setBounds(107, 48, 63, 24);
-        contentPane.add(label_1);
+        JLabel Direccion = new JLabel("Dirección:");
+        Direccion.setBounds(107, 48, 63, 24);
+        contentPane.add(Direccion);
         textDireccion = new JTextField();
         textDireccion.setBounds(179, 46, 129, 24);
         contentPane.add(textDireccion);
 
-        JLabel label_2 = new JLabel("Correo:");
-        label_2.setBounds(107, 83, 63, 24);
-        contentPane.add(label_2);
+        JLabel correo = new JLabel("Correo:");
+        correo.setBounds(107, 83, 63, 24);
+        contentPane.add(correo);
         textCorreo = new JTextField();
         textCorreo.setBounds(180, 81, 129, 24);
         contentPane.add(textCorreo);
 
-        JLabel label_3 = new JLabel("Teléfono:");
-        label_3.setBounds(107, 117, 63, 24);
-        contentPane.add(label_3);
+        JLabel telefono = new JLabel("Teléfono:");
+        telefono.setBounds(107, 117, 63, 24);
+        contentPane.add(telefono);
         textTelefono = new JTextField();
         textTelefono.setBounds(180, 116, 129, 24);
         contentPane.add(textTelefono);
 
-        JLabel label_4 = new JLabel("Web:");
-        label_4.setBounds(107, 152, 63, 24);
-        contentPane.add(label_4);
+        JLabel web = new JLabel("Web:");
+        web.setBounds(107, 152, 63, 24);
+        contentPane.add(web);
         textWeb = new JTextField();
         textWeb.setBounds(180, 151, 129, 24);
         contentPane.add(textWeb);
 
-        JLabel label_5 = new JLabel("ID Compañía:");
-        label_5.setBounds(107, 187, 86, 24);
-        contentPane.add(label_5);
+        JLabel idcompañias = new JLabel("ID Compañía:");
+        idcompañias.setBounds(37, 187, 86, 24);
+        contentPane.add(idcompañias);
         textIdCompania = new JTextField();
-        textIdCompania.setBounds(180, 186, 129, 24);
+        textIdCompania.setBounds(117, 187, 86, 24);
         contentPane.add(textIdCompania);
 
         JButton btnGuardar = new JButton("");
@@ -84,9 +85,8 @@ public class FrmAgencias extends JFrame {
         btneliminar.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		
-        		
-        		
+        		AgenciasClass cr = new AgenciasClass();
+        		cr.delete(Integer.parseInt(textIdCompania.getText()));
         	}
         });
         contentPane.add(btneliminar);
@@ -95,11 +95,21 @@ public class FrmAgencias extends JFrame {
         btnupgrate.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
+        		AgenciasClass cr = new AgenciasClass();
+        		cr.update(Integer.parseInt(textIdCompania.getText()),textNombre.getText(), textDireccion.getText(), textCorreo.getText(), textTelefono.getText(), textWeb.getText(), Integer.parseInt(textidagencias.getText()));
         	}
         });
         btnupgrate.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-actualizar-en-la-nube-50.png"));
         btnupgrate.setBounds(283, 222, 113, 78);
         contentPane.add(btnupgrate);
+        
+        JLabel labidAgencias = new JLabel("ID Agencias:");
+        labidAgencias.setBounds(213, 186, 86, 24);
+        contentPane.add(labidAgencias);
+        
+        textidagencias = new JTextField();
+        textidagencias.setBounds(283, 186, 86, 24);
+        contentPane.add(textidagencias);
     }
 
     private void guardarAgencia() {

@@ -1,16 +1,14 @@
 package view;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
+
+import Metodos.Conexion;
 
 public class FrmLogin extends JFrame {
 
@@ -18,10 +16,8 @@ public class FrmLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField txtContraseña;
+	Conexion conector = new Conexion();
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,9 +31,6 @@ public class FrmLogin extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public FrmLogin() {
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,12 +67,36 @@ public class FrmLogin extends JFrame {
 				String usuario = txtUsuario.getText();
 				String contraseña = new String(txtContraseña.getPassword());
 
-				if (usuario.equals("admin") && contraseña.equals("1234")) {
-					JOptionPane.showMessageDialog(null, "Login exitoso");
+				try {
+					Connection conn = conector.conectarBD();
+					String query = "SELECT rol FROM tblusuarios WHERE nombre = ? AND contraseña = ?";
+					PreparedStatement pst = conn.prepareStatement(query);
+					pst.setString(1, usuario);
+					pst.setString(2, contraseña);
 
-					dispose();
-				} else {
-					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+					ResultSet rs = pst.executeQuery();
+
+					if (rs.next()) {
+						String rol = rs.getString("rol");
+
+						if (rol.equalsIgnoreCase("Administrador")) {
+							JOptionPane.showMessageDialog(null, "Bienvenido Administrador");
+							new FrmAdministrador().setVisible(true);
+							dispose();
+						} else if (rol.equalsIgnoreCase("Usuario")) {
+							JOptionPane.showMessageDialog(null, "Bienvenido Usuario");
+							new FrmUsuario().setVisible(true);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Rol no reconocido");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+					}
+
+				} catch (SQLException ex) {
+					JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos");
+					ex.printStackTrace();
 				}
 			}
 		});
