@@ -14,7 +14,6 @@ public class FrmAgencias extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textNombre, textDireccion, textCorreo, textTelefono, textWeb, textIdCompania;
-    private JTextField textidagencias;
 
     public FrmAgencias() {
         setTitle("Gestión de Agencias");
@@ -61,10 +60,10 @@ public class FrmAgencias extends JFrame {
         contentPane.add(textWeb);
 
         JLabel idcompañias = new JLabel("ID Compañía:");
-        idcompañias.setBounds(37, 187, 86, 24);
+        idcompañias.setBounds(107, 187, 86, 24);
         contentPane.add(idcompañias);
         textIdCompania = new JTextField();
-        textIdCompania.setBounds(117, 187, 86, 24);
+        textIdCompania.setBounds(180, 186, 86, 24);
         contentPane.add(textIdCompania);
 
         JButton btnGuardar = new JButton("");
@@ -74,12 +73,16 @@ public class FrmAgencias extends JFrame {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		AgenciasClass cr = new AgenciasClass();
-				cr.create(textNombre.getText(), textDireccion.getText(), textCorreo.getText(), textTelefono.getText(), textWeb.getText(),Integer.parseInt(textIdCompania.getText()));
+				cr.create(textNombre.getText(), textDireccion.getText(), textCorreo.getText(), textTelefono.getText(), textWeb.getText(), Integer.parseInt(textIdCompania.getText()) );
 			}
 		});
         contentPane.add(btnGuardar);
         
         JButton btneliminar = new JButton("");
+        btneliminar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btneliminar.setBounds(160, 222, 113, 78);
         btneliminar.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-full-trash-64.png"));
         btneliminar.addMouseListener(new MouseAdapter() {
@@ -96,20 +99,12 @@ public class FrmAgencias extends JFrame {
         	@Override
         	public void mouseClicked(MouseEvent e) {
         		AgenciasClass cr = new AgenciasClass();
-        		cr.update(Integer.parseInt(textIdCompania.getText()),textNombre.getText(), textDireccion.getText(), textCorreo.getText(), textTelefono.getText(), textWeb.getText(), Integer.parseInt(textidagencias.getText()));
+        		cr.update(Integer.parseInt(textIdCompania.getText()),textNombre.getText(), textDireccion.getText(), textCorreo.getText(), textTelefono.getText(), textWeb.getText());
         	}
         });
         btnupgrate.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-actualizar-en-la-nube-50.png"));
         btnupgrate.setBounds(283, 222, 113, 78);
         contentPane.add(btnupgrate);
-        
-        JLabel labidAgencias = new JLabel("ID Agencias:");
-        labidAgencias.setBounds(213, 186, 86, 24);
-        contentPane.add(labidAgencias);
-        
-        textidagencias = new JTextField();
-        textidagencias.setBounds(283, 186, 86, 24);
-        contentPane.add(textidagencias);
     }
 
     private void guardarAgencia() {
@@ -123,4 +118,9 @@ public class FrmAgencias extends JFrame {
         AgenciasClass cr = new AgenciasClass();
         cr.create(nombre, direccion, correo, telefono, web, idCompania);
     }
+
+	public static void setDefaultLookAndFeelDecorated(int disposeOnClose) {
+		// TODO Auto-generated method stub
+		
+	}
 }

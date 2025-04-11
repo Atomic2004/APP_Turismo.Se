@@ -146,6 +146,7 @@ public class FrmAdministrador extends JFrame {
 		btnUsuarios.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				cargarTabla("tblusuarios");
+				selector = 11;
 			}
 		});
 		btnUsuarios.setBounds(515, 79, 89, 74);
@@ -156,6 +157,7 @@ public class FrmAdministrador extends JFrame {
 		btnVehiculo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				cargarTabla("tblvehiculo");
+				selector = 12;
 			}
 		});
 		btnVehiculo.setBounds(635, 79, 89, 74);
@@ -181,8 +183,81 @@ public class FrmAdministrador extends JFrame {
 				FrmVehiculo frmVehiculo = new FrmVehiculo();
 				
 				if(selector != 0) {
-					
-					
+				switch (selector) {
+					case 1 -> {
+						FrmAgencias.setDefaultLookAndFeelDecorated(JFrame.DISPOSE_ON_CLOSE);
+						FrmAgencias frmAgencias2 = new FrmAgencias();
+						frmAgencias2.setVisible(true);
+					}
+					case 2 -> {
+						FrmClientes.setDefaultLookAndFeelDecorated(JFrame.DISPOSE_ON_CLOSE);
+						FrmClientes frmClientes2 = new FrmClientes();
+						frmClientes2.setVisible(true);
+					}
+					case 3 -> {
+						FrmCompanias.setDefaultLookAndFeelDecorated(JFrame.DISPOSE_ON_CLOSE);
+						FrmClientes frmCompanias2 = new FrmClientes();
+						frmCompanias2.setVisible(true);	
+					}
+					case 4 -> {
+						frmDestinos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmDestinos frmDestinos2 = new FrmDestinos();
+						frmDestinos2.setVisible(true);
+					}
+					case 5 -> {
+						frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmLogin frmLogin2 = new FrmLogin();
+						frmLogin2.setVisible(true);
+					}
+					case 6 -> {
+						frmMedios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmMedios frmMedios2 = new FrmMedios();
+						frmMedios2.setVisible(true);
+					}
+					case 7 -> {
+						frmPanel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmPanel frmPanel2 = new FrmPanel();
+						frmPanel2.setVisible(true);
+					}
+					case 8 -> {
+						frmPaquetes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmPaquetes frmPaquetes2 = new FrmPaquetes();
+						frmPaquetes2.setVisible(true);
+					}
+					case 9 -> {
+						frmPromotores.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmPromotores frmPromotores2 = new FrmPromotores();
+						frmPromotores2.setVisible(true);
+					}
+					case 10 -> {
+						frmTipoDocumento.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmTipoDocumento frmTipoDocumento2 = new FrmTipoDocumento();
+						frmTipoDocumento2.setVisible(true);
+					}
+					case 11 -> {
+						frmTiposMedios.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmTiposMedios frmTiposMedios2 = new FrmTiposMedios();
+						frmTiposMedios2.setVisible(true);
+					}
+					case 12 -> {
+						frmTipoTransporte.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmTipoTransporte frmTipoTransporte2 = new FrmTipoTransporte();
+						frmTipoTransporte2.setVisible(true);
+					}
+					case 13 -> {
+						frmUsuario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmUsuario frmUsuario2 = new FrmUsuario();
+						frmUsuario2.setVisible(true);
+					}
+					case 14 -> {
+						frmVehiculo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						FrmVehiculo frmVehiculo2 = new FrmVehiculo();
+						frmVehiculo2.setVisible(true);
+					}
+					default -> {
+						JOptionPane.showMessageDialog(null, "Opción no válida.");
+					}
+					}
 				}
 			}
 		});

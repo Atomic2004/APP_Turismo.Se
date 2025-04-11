@@ -110,11 +110,11 @@ public class AgenciasClass {
 	            System.out.println(e.getMessage());
 	        }
 	}
-	    public void update(int idagencia, String nombre, String direccion, String correo, String telefono, String web, int idcompania) {
+	    public void update(int idagencia, String nombre, String direccion, String correo, String telefono, String web) {
 			Connection dbConnection = null;
 			PreparedStatement pst = null;
 
-			String script = "UPDATE tblagencias SET nombre = ?, direccion = ?, correo = ?, telefono = ?, web = ?, idcompania = ? WHERE idagencia = ?;";
+			String script = "UPDATE tblagencias SET nombre = ?, direccion = ?, correo = ?, telefono = ?, web = ?, idcompania = ?";
 			try {
 				dbConnection = conector.conectarBD();
 				pst = dbConnection.prepareStatement(script);
@@ -124,7 +124,6 @@ public class AgenciasClass {
 				pst.setString(3, correo);
 				pst.setString(4, telefono);
 				pst.setString(5, web);
-				pst.setInt(6, idcompania);
 				pst.setInt(7, idagencia);
 
 				int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar esta fila?");

@@ -3,6 +3,9 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import Metodos.Conexion;
 
 public class CompaniasClass {
@@ -107,5 +110,55 @@ public class CompaniasClass {
             System.out.println(e.getMessage());
         }
     }
+    public void update(int idcompania, String razonsocial, String direccion, String correo, String telefono, String fechacreacion, String web) {
+        Connection dbConnection = null;
+        PreparedStatement pst = null;
+
+        String script = "UPDATE tblcompanias SET razonsocial = ?, direccion = ?, correo = ?, telefono = ?, fechacreacion = ?, web = ? WHERE idcompania = ?";
+        try {
+            dbConnection = conector.conectarBD();
+            pst = dbConnection.prepareStatement(script);
+
+            pst.setString(1, razonsocial);
+            pst.setString(2, direccion);
+            pst.setString(3, correo);
+            pst.setString(4, telefono);
+            pst.setString(5, fechacreacion);
+            pst.setString(6, web);
+            pst.setInt(7, idcompania);
+
+            int confirm = JOptionPane.showConfirmDialog(null, "¿Desea actualizar esta compañía?");
+            if (confirm == JOptionPane.OK_OPTION) {
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Compañía actualizada con éxito");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void delete(int idcompania) {
+        Connection dbConnection = null;
+        PreparedStatement pst = null;
+
+        String script = "DELETE FROM tblcompanias WHERE idcompania = ?";
+        try {
+            dbConnection = conector.conectarBD();
+            pst = dbConnection.prepareStatement(script);
+            pst.setInt(1, idcompania);
+
+            int confirm = JOptionPane.showConfirmDialog(null, "¿Desea eliminar esta compañía?");
+            if (confirm == JOptionPane.OK_OPTION) {
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Compañía eliminada con éxito");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    
+    
+    
 
 }

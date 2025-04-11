@@ -6,116 +6,132 @@ import java.sql.SQLException;
 import Metodos.Conexion;
 
 public class OperadoresClass {
-	public int id;
-	public int tipodocumento;
-	public int documento;
-	public String nombres;
-	public String apellidos;
-	public String direccion;
-	public String correo;
-	public String telefono;
+    // Atributos de la clase
+    private int idOperador;
+    private String nombre;
+    private String direccion;
+    private String correo;
+    private String telefono;
+    private String licencia;
 
-	public OperadoresClass(int id, int tipodocumento, int documento, String nombres, String apellidos, String direccion,
-			String correo, String telefono) {
-		super();
-		this.id = id;
-		this.tipodocumento = tipodocumento;
-		this.documento = documento;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.direccion = direccion;
-		this.correo = correo;
-		this.telefono = telefono;
-	}
-	public OperadoresClass() {
-		
-	}
+    // Constructor de la clase
+    public OperadoresClass(int idOperador, String nombre, String direccion, String correo, String telefono, String licencia) {
+        this.idOperador = idOperador;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.licencia = licencia;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public OperadoresClass() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    // Getters y Setters
+    public int getIdOperador() {
+        return idOperador;
+    }
 
-	public int getTipodocumento() {
-		return tipodocumento;
-	}
+    public void setIdOperador(int idOperador) {
+        this.idOperador = idOperador;
+    }
 
-	public void setTipodocumento(int tipodocumento) {
-		this.tipodocumento = tipodocumento;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getDocumento() {
-		return documento;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setDocumento(int documento) {
-		this.documento = documento;
-	}
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public String getNombres() {
-		return nombres;
-	}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
+    public String getCorreo() {
+        return correo;
+    }
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    public String getLicencia() {
+        return licencia;
+    }
 
-	public String getCorreo() {
-		return correo;
-	}
+    public void setLicencia(String licencia) {
+        this.licencia = licencia;
+    }
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+    Conexion conector = new Conexion();
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public void create(String nombre, String direccion, String correo, String telefono, String licencia) {
+        Connection dbConnection = null;
+        PreparedStatement pst = null;
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+        String script = "INSERT INTO tbloperadores (nombre, direccion, correo, telefono, licencia) VALUES (?, ?, ?, ?, ?)";
+        try {
+            dbConnection = conector.conectarBD();
+            pst = dbConnection.prepareStatement(script);
+            pst.setString(1, nombre);
+            pst.setString(2, direccion);
+            pst.setString(3, correo);
+            pst.setString(4, telefono);
+            pst.setString(5, licencia);
+            pst.execute();
+            System.out.println("Operador registrado con éxito.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-	Conexion conector = new Conexion();
+    public void update(int idOperador, String nombre, String direccion, String correo, String telefono, String licencia) {
+        Connection dbConnection = null;
+        PreparedStatement pst = null;
 
-	public void create(int tipodocumento, int documento, String nombres, String apellidos, String direccion,
-			String correo, String telefono) {
-		Connection dbConnection = null;
-		PreparedStatement pst = null;
-		String script = "INSERT INTO tbloperadores (tipodocumento, documento, nombres, apellidos, direccion, correo, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try {
-			dbConnection = new Conexion().conectarBD();
-			pst = dbConnection.prepareStatement(script);
-			pst.setInt(1, tipodocumento);
-			pst.setInt(2, documento);
-			pst.setString(3, nombres);
-			pst.setString(4, apellidos);
-			pst.setString(5, direccion);
-			pst.setString(6, correo);
-			pst.setString(7, telefono);
-			pst.execute();
-			System.out.println("Operador registrado con éxito.");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+        String script = "UPDATE tbloperadores SET nombre = ?, direccion = ?, correo = ?, telefono = ?, licencia = ? WHERE idOperador = ?";
+        try {
+            dbConnection = conector.conectarBD();
+            pst = dbConnection.prepareStatement(script);
+            pst.setString(1, nombre);
+            pst.setString(2, direccion);
+            pst.setString(3, correo);
+            pst.setString(4, telefono);
+            pst.setString(5, licencia);
+            pst.setInt(6, idOperador);
+            pst.executeUpdate();
+            System.out.println("Operador actualizado con éxito.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void delete(int idOperador) {
+        Connection dbConnection = null;
+        PreparedStatement pst = null;
+
+        String script = "DELETE FROM tbloperadores WHERE idOperador = ?";
+        try {
+            dbConnection = conector.conectarBD();
+            pst = dbConnection.prepareStatement(script);
+            pst.setInt(1, idOperador);
+            pst.executeUpdate();
+            System.out.println("Operador eliminado con éxito.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

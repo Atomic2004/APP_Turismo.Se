@@ -142,4 +142,9 @@ public class FrmClientes extends JFrame {
         });
         contentPane.add(btnActualizar);
     }
+
+	public static void setDefaultLookAndFeelDecorated(int disposeOnClose) {
+		// TODO Auto-generated method stub
+		
+	}
 }

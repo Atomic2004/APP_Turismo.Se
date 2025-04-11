@@ -108,6 +108,7 @@ public class FrmMedios extends JFrame {
 		contentPane.add(btneliminar);
 		
 		JButton btnupdate = new JButton("");
+		btnupdate.setIcon(new ImageIcon("C:\\Users\\APRENDIZ\\Downloads\\icons8-actualizar-en-la-nube-50.png"));
 		btnupdate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
